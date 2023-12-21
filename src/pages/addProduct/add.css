@@ -1,0 +1,45 @@
+.submitButton {
+	/* background-color: #fab07a; */
+	/* background-color: #112a25; */
+	background-color: #fab07a;
+	box-shadow: 0px 0px 7px 2.5px #b4774b;
+	color: white;
+	padding-left: 2rem;
+	padding-right: 2rem;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	margin-top: 1rem;
+	margin-bottom: 2rem;
+	transition-duration: 200ms;
+	border-radius: 0.5rem;
+	outline: none;
+	cursor: pointer;
+	/* width: fit-content; */
+	font-weight: 700;
+}
+
+@media screen and (max-width: 480px) {
+	.submitButton {
+		/* background-color: #fab07a; */
+		/* background-color: #112a25; */
+		background-color: #fab07a;
+		box-shadow: 0px 0px 7px 2.5px #b4774b;
+		color: white;
+		padding: 0.5rem 1rem;
+		margin-top: 1rem;
+		margin-bottom: 2rem;
+		transition-duration: 200ms;
+		border-radius: 0.5rem;
+		outline: none;
+		cursor: pointer;
+		/* width: fit-content; */
+		font-weight: 700;
+		font-size: small;
+	}
+}
+
+.submitButton:active {
+	background-color: #e9a16e;
+	transform: scale(0.97);
+	box-shadow: 0px 0px 5px 2px #b4774b;
+}
