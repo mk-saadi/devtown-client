@@ -18,3 +18,23 @@ body {
 ::-webkit-scrollbar-thumb:hover {
 	background-color: #fab07a;
 }
+
+/* homeGrid */
+.homeGrid {
+	height: 250px;
+	display: block;
+	margin: 0 auto;
+	width: auto;
+}
+
+@media (min-width: 768px) {
+	.homeGrid {
+		height: 280px;
+	}
+}
+
+@media (min-width: 1280px) {
+	.homeGrid {
+		height: 300px;
+	}
+}

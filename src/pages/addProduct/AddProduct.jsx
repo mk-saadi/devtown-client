@@ -9,7 +9,30 @@ import { Fade, Slide } from "react-awesome-reveal";
 import axios from "axios";
 import "./add.css";
 import Header from "../../component/Header";
-import Navbar from "../../component/Navbar";
+
+const brand = [
+	{ name: "Apple iPhone" },
+	{ name: "BlackBurry" },
+	{ name: "BlackMagic" },
+	{ name: "Google Pixel" },
+	{ name: "Huawei" },
+	{ name: "Honor" },
+	{ name: "Infinix" },
+	{ name: "Itel" },
+	{ name: "IQOO" },
+	{ name: "Motorola" },
+	{ name: "OnePlus" },
+	{ name: "Oppo" },
+	{ name: "Realme" },
+	{ name: "Redmi" },
+	{ name: "Samsung" },
+	{ name: "Symphony" },
+	{ name: "Sony" },
+	{ name: "Tecno" },
+	{ name: "Vivo" },
+	{ name: "Walton" },
+	{ name: "Xiaomi" },
+];
 
 const processor = [
 	{ name: "Apple Bionic" },
@@ -22,6 +45,7 @@ const processor = [
 ];
 const memory = [
 	{ name: "2 GB" },
+	{ name: "3 GB" },
 	{ name: "4 GB" },
 	{ name: "6 GB" },
 	{ name: "8 GB" },
@@ -54,6 +78,7 @@ const operatingSystem = [
 	{ name: "Palm OS" },
 	{ name: "WebOS" },
 	{ name: "ColorOS" },
+	{ name: "One UI" },
 	{ name: "OxygenOS" },
 	{ name: "MIUI" },
 	{ name: "Realme UI" },
@@ -70,6 +95,7 @@ const AddProduct = () => {
 	const [selectedOS, setSelectedOS] = useState(operatingSystem[0]);
 	const [selectedMemory, setSelectedMemory] = useState(memory[0]);
 	const [selectedStorage, setSelectedStorage] = useState(storage[0]);
+	const [selectedBrand, setSelectedBrand] = useState(brand[0]);
 
 	const imgbbApiKey = "5617d55658537c83fee4ef9a7cffb921";
 
@@ -112,15 +138,16 @@ const AddProduct = () => {
 			const mainPhotoUrl = await uploadToImgbb(compressedMainPhoto);
 
 			const overview = form.overview.value;
-			const price = form.price.value;
+			const price = parseFloat(form.price.value);
 			const color = form.color.value;
 			const material = form.material.value;
 			const description = form.description.value;
-			const brand = selectedProcessor.name;
+			const processor = selectedProcessor.name;
+			const brand = selectedBrand.name;
 			const memory = selectedMemory.name;
 			const storage = selectedStorage.name;
 			const os = selectedOS.name;
-			const quantity = form.quantity.value;
+			const quantity = parseFloat(form.quantity.value);
 
 			const listItem = {
 				productName,
@@ -130,6 +157,7 @@ const AddProduct = () => {
 				color,
 				material,
 				description,
+				processor,
 				brand,
 				os,
 				quantity,
@@ -145,7 +173,10 @@ const AddProduct = () => {
 				);
 				if (response.data.acknowledged === true) {
 					showToast("success", "Product added to database!");
-					form.reset();
+					// form.reset();
+					setTimeout(() => {
+						window.location.reload();
+					}, 1500);
 				}
 			} catch (error) {
 				showToast(
@@ -358,11 +389,10 @@ const AddProduct = () => {
 							</div>
 						</div>
 
-						{/* processor brand BELOW */}
 						<div className="flex-col items-center justify-around w-full md:flex gap-y-4 gap-x-3 md:flex-row col-span-full ">
 							<Listbox
-								value={selectedProcessor}
-								onChange={setSelectedProcessor}
+								value={selectedBrand}
+								onChange={setSelectedBrand}
 								required
 								name="brand"
 							>
@@ -371,11 +401,11 @@ const AddProduct = () => {
 										htmlFor="brand"
 										className="block text-sm font-semibold leading-6 text-gray-900"
 									>
-										Select Processor Brand
+										Select Smartphone Brand
 									</label>
 									<Listbox.Button className="relative w-full mt-2.5 py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:border-orange-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm ring-1 ring-inset ring-gray-400">
 										<span className="block truncate">
-											{selectedProcessor.name}
+											{selectedBrand.name}
 										</span>
 										<span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
 											<ChevronsUpDown
@@ -391,7 +421,7 @@ const AddProduct = () => {
 										leaveTo="opacity-0"
 									>
 										<Listbox.Options className="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black/5 focus:outline-none sm:text-sm">
-											{processor.map((br, brIdx) => (
+											{brand.map((br, brIdx) => (
 												<Listbox.Option
 													key={brIdx}
 													className={({ active }) =>
@@ -413,6 +443,80 @@ const AddProduct = () => {
 																}`}
 															>
 																{br.name}
+															</span>
+															{selected ? (
+																<span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
+																	<Check
+																		className="w-5 h-5"
+																		aria-hidden="true"
+																	/>
+																</span>
+															) : null}
+														</>
+													)}
+												</Listbox.Option>
+											))}
+										</Listbox.Options>
+									</Transition>
+								</div>
+							</Listbox>
+						</div>
+
+						{/* processor select BELOW */}
+						<div className="flex-col items-center justify-around w-full md:flex gap-y-4 gap-x-3 md:flex-row col-span-full ">
+							<Listbox
+								value={selectedProcessor}
+								onChange={setSelectedProcessor}
+								required
+								name="processor"
+							>
+								<div className="relative w-full mt-1">
+									<label
+										htmlFor="processor"
+										className="block text-sm font-semibold leading-6 text-gray-900"
+									>
+										Select Smartphone Processor
+									</label>
+									<Listbox.Button className="relative w-full mt-2.5 py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:border-orange-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm ring-1 ring-inset ring-gray-400">
+										<span className="block truncate">
+											{selectedProcessor.name}
+										</span>
+										<span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+											<ChevronsUpDown
+												className="w-5 h-5 text-gray-400"
+												aria-hidden="true"
+											/>
+										</span>
+									</Listbox.Button>
+									<Transition
+										as={Fragment}
+										leave="transition ease-in duration-100"
+										leaveFrom="opacity-100"
+										leaveTo="opacity-0"
+									>
+										<Listbox.Options className="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black/5 focus:outline-none sm:text-sm">
+											{processor.map((ps, psIdx) => (
+												<Listbox.Option
+													key={psIdx}
+													className={({ active }) =>
+														`relative select-none py-2 pl-10 pr-4 font-semibold cursor-pointer ${
+															active
+																? "bg-amber-100 text-amber-900"
+																: "text-gray-900"
+														}`
+													}
+													value={ps}
+												>
+													{({ selected }) => (
+														<>
+															<span
+																className={`block truncate ${
+																	selected
+																		? "font-medium"
+																		: "font-normal"
+																}`}
+															>
+																{ps.name}
 															</span>
 															{selected ? (
 																<span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
@@ -761,7 +865,7 @@ const AddProduct = () => {
 								<textarea
 									name="description"
 									id="description"
-									rows={4}
+									rows={8}
 									className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900  ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  focus:ring-[#fab07a] focus:outline-none sm:text-sm sm:leading-6 shadow-md"
 									defaultValue={""}
 									required

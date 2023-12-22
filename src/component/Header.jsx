@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
-import { X, AlignCenter } from "lucide-react";
+import { X, AlignCenter, ShoppingBag } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Fade } from "react-awesome-reveal";
 
 const navigation = [
 	{ name: "Home", to: "/" },
 	{ name: "Smartphones", to: "/smartphones" },
-	{ name: "AddProduct", to: "/AddProducts" },
+	{ name: "Search", to: "/search" },
+	{ name: "AddProduct", to: "/addProducts" },
 ];
 
 const Header = () => {
@@ -43,24 +45,28 @@ const Header = () => {
 						/>
 					</button>
 				</div>
-				<div className="hidden lg:flex lg:gap-x-12">
+
+				<Fade
+					className="hidden mx-6 lg:flex lg:gap-x-12"
+					cascade
+					triggerOnce
+					damping={0.3}
+					// direction="bottom-right"
+				>
 					{navigation.map((item) => (
 						<Link
 							key={item.name}
 							to={item.to}
-							className="text-sm font-semibold leading-6 text-gray-900"
+							className="text-sm font-semibold leading-6 text-gray-700"
 						>
 							{item.name}
 						</Link>
 					))}
-				</div>
+				</Fade>
 				<div className="hidden lg:flex lg:flex-1 lg:justify-end">
-					<a
-						href="#"
-						className="text-sm font-semibold leading-6 text-gray-900"
-					>
-						Log in <span aria-hidden="true">&rarr;</span>
-					</a>
+					<button className="text-sm font-semibold leading-6 text-gray-700">
+						<ShoppingBag />
+					</button>
 				</div>
 			</nav>
 			<Dialog
@@ -70,7 +76,7 @@ const Header = () => {
 				onClose={setMobileMenuOpen}
 			>
 				<div className="fixed inset-0 z-50" />
-				<Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full px-6 py-6 overflow-y-auto shadow-2xl bg-orange-50 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+				<Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full px-6 py-6 overflow-y-auto shadow-2xl shadow-gray-800/85 bg-orange-50 sm:max-w-xs sm:ring-1 sm:ring-gray-400">
 					<div className="flex items-center justify-between">
 						<Link
 							to="/"

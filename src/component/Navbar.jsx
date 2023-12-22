@@ -7,7 +7,7 @@ const Navbar = () => {
 				<Header />
 			</div>
 
-			<div className="relative px-6 isolate pt-14 lg:px-8">
+			<div className="relative px-6 pt-8 isolate lg:px-8">
 				<div
 					className="absolute inset-x-0 overflow-hidden -top-40 -z-10 transform-gpu blur-3xl sm:-top-80"
 					aria-hidden="true"
