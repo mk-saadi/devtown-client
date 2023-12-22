@@ -8,6 +8,7 @@ import AddProduct from "./pages/addProduct/AddProduct";
 import ErrorElement from "./component/ErrorElement";
 import Exp from "./component/Exp";
 import ProductDetail from "./pages/product/ProductDetail";
+import AllProducts from "./pages/product/AllProducts";
 
 const router = createBrowserRouter([
 	{
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
 				element: <ProductDetail />,
 				loader: ({ params }) =>
 					fetch(`http://localhost:2100/products/${params.id}`),
+			},
+			{
+				path: "/allSmartphones",
+				element: <AllProducts />,
 			},
 		],
 	},

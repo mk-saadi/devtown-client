@@ -77,7 +77,10 @@ const Hero = ({ it }) => {
 								leaveTo="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
 							>
 								<Dialog.Panel className="flex w-full text-base text-left transition transform md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl">
-									<div className="relative flex items-center w-full px-4 pb-8 overflow-hidden bg-white shadow-2xl pt-14 sm:px-6 sm:pt-8 rounded-xl md:p-6 lg:p-8">
+									<div
+										className="relative flex items-center w-full px-4 pb-8 overflow-hidden bg-white shadow-2xl pt-14 sm:px-6 sm:pt-8 rounded-xl md:p-6 lg:p-8"
+										style={{ zIndex: "99999" }}
+									>
 										<button
 											type="button"
 											className="absolute text-gray-400 right-4 top-4 hover:text-gray-500 sm:right-6 sm:top-8 md:right-6 md:top-6 lg:right-8 lg:top-8"
@@ -104,6 +107,9 @@ const Hero = ({ it }) => {
 												<h2 className="text-2xl font-bold text-gray-900 sm:pr-12">
 													{it.productName}
 												</h2>
+												<p className="text-xl font-semibold text-gray-700/50">
+													{it.brand}
+												</p>
 
 												<section
 													aria-labelledby="information-heading"
@@ -116,9 +122,25 @@ const Hero = ({ it }) => {
 														Product information
 													</h3>
 
-													<p className="mt-2">
-														{it.overview}
-													</p>
+													<ul className="my-3 list-disc list-inside">
+														{it.overview
+															.split(",")
+															.map(
+																(
+																	item,
+																	index
+																) => (
+																	<li
+																		key={
+																			index
+																		}
+																		className="ml-4"
+																	>
+																		{item}
+																	</li>
+																)
+															)}
+													</ul>
 
 													<p className="text-2xl text-gray-900">
 														$ {it.price}
@@ -140,12 +162,36 @@ const Hero = ({ it }) => {
 													</h3>
 
 													<div>
-														<p>
+														{/* <p>
 															Available colors{" "}
 															{it.color
 																.split(".")
 																.join(" ")}
-														</p>
+														</p> */}
+														<ul className="my-3 list-disc list-inside">
+															<p>
+																Available Colors
+															</p>
+															{it?.color
+																.split(",")
+																.map(
+																	(
+																		item,
+																		index
+																	) => (
+																		<li
+																			key={
+																				index
+																			}
+																			className="ml-4"
+																		>
+																			{
+																				item
+																			}
+																		</li>
+																	)
+																)}
+														</ul>
 
 														<p className="mt-2">
 															Operating System{" "}
@@ -153,7 +199,8 @@ const Hero = ({ it }) => {
 														</p>
 
 														<p className="mt-2">
-															Processor {it.brand}
+															Processor{" "}
+															{it.processor}
 														</p>
 													</div>
 												</section>

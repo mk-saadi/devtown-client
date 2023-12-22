@@ -6,7 +6,7 @@ import { Fade } from "react-awesome-reveal";
 
 const navigation = [
 	{ name: "Home", to: "/" },
-	{ name: "Smartphones", to: "/smartphones" },
+	{ name: "Smartphones", to: "/allSmartphones" },
 	{ name: "Search", to: "/search" },
 	{ name: "AddProduct", to: "/addProducts" },
 ];

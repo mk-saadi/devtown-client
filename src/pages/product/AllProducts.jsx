@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import Navbar from "../../component/Navbar";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { ChevronsDown, ChevronsUp, MoveRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import Hero from "../home/Hero";
+import Header from "../../component/Header";
 import { Fade } from "react-awesome-reveal";
-import Hero from "./Hero";
-import { MoveRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const Home = () => {
+const AllProducts = () => {
 	const [item, setItem] = useState([]);
 
 	useEffect(() => {
@@ -20,9 +20,29 @@ const Home = () => {
 			});
 	}, []);
 
+	const [sortOrder, setSortOrder] = useState("asc");
+	const handleSort = () => {
+		const sortedItems = [...item];
+		sortedItems.sort((a, b) => {
+			const priceA = parseFloat(a.price);
+			const priceB = parseFloat(b.price);
+			return sortOrder === "asc" ? priceA - priceB : priceB - priceA;
+		});
+		setItem(sortedItems);
+		setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+	};
+
 	return (
 		<div className="max-w-2xl min-h-screen px-4 py-16 mx-auto sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 overflow-x-none">
-			<Navbar />
+			<Header />
+
+			<button
+				onClick={handleSort}
+				className="flex justify-center gap-3 submitButton"
+			>
+				Sort by Price{" "}
+				{sortOrder === "asc" ? <ChevronsDown /> : <ChevronsUp />}
+			</button>
 
 			<div className="grid grid-cols-1 overflow-hidden sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 				{item.map((it) => (
@@ -32,7 +52,7 @@ const Home = () => {
 						key={it._id}
 					>
 						<div className="relative flex flex-col items-center justify-center p-8 duration-300 border border-gray-900/15 group hover:bg-gray-700/10">
-							<Link
+							<div
 								className="group"
 								to={`/product/${it._id}`}
 							>
@@ -50,7 +70,7 @@ const Home = () => {
 								<p className="mt-1 mb-6 text-lg font-medium text-gray-900">
 									$ {it?.price}
 								</p>
-							</Link>
+							</div>
 							<div className="absolute w-full py-2 font-medium text-center duration-300 bg-white bg-opacity-50 opacity-0 bottom-36 group-hover:opacity-100 ">
 								<Hero it={it} />
 							</div>
@@ -74,4 +94,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default AllProducts;
