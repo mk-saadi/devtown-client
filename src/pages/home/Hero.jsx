@@ -100,7 +100,7 @@ const Hero = ({ it }) => {
 												<img
 													src={it.mainPhoto}
 													alt={product.imageAlt}
-													className="object-cover object-center"
+													className="object-cover object-center max-h-[350px] w-auto"
 												/>
 											</div>
 											<div className="sm:col-span-8 lg:col-span-7">
@@ -125,6 +125,7 @@ const Hero = ({ it }) => {
 													<ul className="my-3 list-disc list-inside">
 														{it.overview
 															.split(",")
+															.slice(0, 5)
 															.map(
 																(
 																	item,

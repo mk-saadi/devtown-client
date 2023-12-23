@@ -9,6 +9,7 @@ import ErrorElement from "./component/ErrorElement";
 import Exp from "./component/Exp";
 import ProductDetail from "./pages/product/ProductDetail";
 import AllProducts from "./pages/product/AllProducts";
+import Search from "./pages/product/Search";
 
 const router = createBrowserRouter([
 	{
@@ -31,12 +32,14 @@ const router = createBrowserRouter([
 			{
 				path: "/product/:id",
 				element: <ProductDetail />,
-				loader: ({ params }) =>
-					fetch(`http://localhost:2100/products/${params.id}`),
 			},
 			{
 				path: "/allSmartphones",
 				element: <AllProducts />,
+			},
+			{
+				path: "/search",
+				element: <Search />,
 			},
 		],
 	},

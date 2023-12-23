@@ -18,6 +18,13 @@ body {
 ::-webkit-scrollbar-thumb:hover {
 	background-color: #fab07a;
 }
+/* hide scroll bar */
+.storyModal::-webkit-scrollbar {
+	overflow-y: auto;
+	display: none;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
 
 /* homeGrid */
 .homeGrid {

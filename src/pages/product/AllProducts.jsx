@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 
 const AllProducts = () => {
 	const [item, setItem] = useState([]);
+	const [selectedMemory, setSelectedMemory] = useState("");
 
 	useEffect(() => {
 		axios
@@ -32,22 +33,65 @@ const AllProducts = () => {
 		setSortOrder(sortOrder === "asc" ? "desc" : "asc");
 	};
 
+	const handleMemoryChange = (event) => {
+		setSelectedMemory(event.target.value);
+	};
+
+	const filteredItems = selectedMemory
+		? item.filter((it) => it.memory.includes(selectedMemory))
+		: item;
+
 	return (
 		<div className="max-w-2xl min-h-screen px-4 py-16 mx-auto sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 overflow-x-none">
 			<Header />
 
-			<button
-				onClick={handleSort}
-				className="flex justify-center gap-3 submitButton"
-			>
-				Sort by Price{" "}
-				{sortOrder === "asc" ? <ChevronsDown /> : <ChevronsUp />}
-			</button>
+			<div className="flex flex-col items-center justify-start mb-4 gap-y-4 md:gap-x-12 md:flex-row">
+				<button
+					onClick={handleSort}
+					className="flex justify-center gap-3 submitButton"
+				>
+					Sort by Price
+					{sortOrder === "asc" ? <ChevronsDown /> : <ChevronsUp />}
+				</button>
+
+				<div className="flex items-center justify-start gap-4 ">
+					<label
+						htmlFor="memoryFilter"
+						className="block -mt-4 text-base font-medium text-gray-700 whitespace-nowrap"
+					>
+						Filter by Ram:
+					</label>
+					<select
+						id="memoryFilter"
+						name="memoryFilter"
+						value={selectedMemory}
+						onChange={handleMemoryChange}
+						className="w-full px-2 py-3 mt-1 rounded-lg cursor-default submitButton focus:outline-none "
+					>
+						<option value="">All</option>
+						{item
+							.map((it) => it.memory)
+							.filter(
+								(value, index, self) =>
+									self.indexOf(value) === index
+							)
+							.map((memory, index) => (
+								<option
+									key={index}
+									value={memory}
+								>
+									{memory}
+								</option>
+							))}
+					</select>
+				</div>
+			</div>
 
 			<div className="grid grid-cols-1 overflow-hidden sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-				{item.map((it) => (
+				{filteredItems.map((it) => (
 					<Fade
-						direction="up"
+						cascade
+						damping={0.8}
 						triggerOnce
 						key={it._id}
 					>

@@ -3,7 +3,7 @@ import Header from "./Header";
 const Navbar = () => {
 	return (
 		<div className="bg-orange-50">
-			<div className="absolute inset-x-0 top-0 z-5">
+			<div className="w-full">
 				<Header />
 			</div>
 
