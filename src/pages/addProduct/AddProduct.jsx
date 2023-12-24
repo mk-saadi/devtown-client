@@ -116,6 +116,16 @@ const AddProduct = () => {
 		}
 	};
 
+	function getRandomNumber() {
+		for (let attempt = 0; attempt < 4; attempt++) {
+			const randomNumber = Math.floor(Math.random() * 5) + 1;
+			if (randomNumber <= 5) {
+				return randomNumber;
+			}
+		}
+		return 3;
+	}
+
 	const handleAddProduct = async (e) => {
 		e.preventDefault();
 		showToast("loading", "Please wait!");
@@ -163,12 +173,12 @@ const AddProduct = () => {
 				quantity,
 				memory,
 				storage,
+				randomValue: getRandomNumber(),
 			};
-			console.log("listItem: ", listItem);
 
 			try {
 				const response = await axios.post(
-					"http://localhost:2100/products",
+					"https://devtown-server-lniza185a-mk-saadi.vercel.app/products",
 					listItem
 				);
 				if (response.data.acknowledged === true) {
@@ -229,8 +239,8 @@ const AddProduct = () => {
 						Add new Mobile to Database
 					</h2>
 					<p className="mt-2 text-lg leading-8 text-gray-500">
-						Aute magna irure deserunt veniam aliqua magna enim
-						voluptate.
+						Enter all the required fields to add the smartphone in
+						the database.
 					</p>
 				</div>
 				<form
@@ -258,7 +268,7 @@ const AddProduct = () => {
 									name="productName"
 									id="productName"
 									autoComplete="product-name"
-									className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-md ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#fab07a] focus:outline-none sm:text-sm sm:leading-6"
+									className="md:text-base block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-md ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#fab07a] focus:outline-none sm:text-sm sm:leading-6"
 									required
 								/>
 							</div>
@@ -285,7 +295,7 @@ const AddProduct = () => {
 									type="text"
 									name="price"
 									id="price"
-									className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-md ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  focus:ring-[#fab07a] focus:outline-none sm:text-sm sm:leading-6 pl-7"
+									className="md:text-base block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-md ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  focus:ring-[#fab07a] focus:outline-none sm:text-sm sm:leading-6 pl-7"
 									required
 								/>
 							</div>
@@ -312,7 +322,7 @@ const AddProduct = () => {
 									id="overview"
 									autoComplete="organization"
 									rows={5}
-									className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-md ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  focus:ring-[#fab07a] focus:outline-none sm:text-sm sm:leading-6"
+									className="md:text-base block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-md ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  focus:ring-[#fab07a] focus:outline-none sm:text-sm sm:leading-6"
 									defaultValue={""}
 									required
 								></textarea>
@@ -359,7 +369,7 @@ const AddProduct = () => {
 												<div className="flex mt-4 text-sm leading-6 text-gray-600">
 													<label
 														htmlFor="preview-image"
-														className="relative font-semibold text-[#fab07a] bg-white rounded-md cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+														className="relative font-semibold text-[#fab07a] bg-white rounded-md cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-orange-600 focus-within:ring-offset-2 hover:text-orange-500"
 													>
 														<span>
 															Upload a file
@@ -780,7 +790,7 @@ const AddProduct = () => {
 									name="quantity"
 									id="quantity"
 									autoComplete="number"
-									className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-md ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  focus:ring-[#fab07a] focus:outline-none sm:text-sm sm:leading-6"
+									className="md:text-base block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-md ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  focus:ring-[#fab07a] focus:outline-none sm:text-sm sm:leading-6"
 									required
 								/>
 							</div>
@@ -810,7 +820,7 @@ const AddProduct = () => {
 									name="color"
 									id="color"
 									autoComplete="color"
-									className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-md ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  focus:ring-[#fab07a] focus:outline-none sm:text-sm sm:leading-6"
+									className="md:text-base block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-md ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  focus:ring-[#fab07a] focus:outline-none sm:text-sm sm:leading-6"
 									required
 								/>
 							</div>
@@ -840,7 +850,7 @@ const AddProduct = () => {
 									name="material"
 									id="material"
 									autoComplete="material"
-									className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-md ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  focus:ring-[#fab07a] focus:outline-none sm:text-sm sm:leading-6"
+									className=" md:text-base block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-md ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  focus:ring-[#fab07a] focus:outline-none sm:text-sm sm:leading-6"
 									required
 								/>
 							</div>
@@ -866,7 +876,7 @@ const AddProduct = () => {
 									name="description"
 									id="description"
 									rows={8}
-									className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900  ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  focus:ring-[#fab07a] focus:outline-none sm:text-sm sm:leading-6 shadow-md"
+									className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900  ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  focus:ring-[#fab07a] focus:outline-none sm:text-sm sm:leading-6 shadow-md md:text-base"
 									defaultValue={""}
 									required
 								/>

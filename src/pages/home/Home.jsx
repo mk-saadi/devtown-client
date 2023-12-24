@@ -11,7 +11,9 @@ const Home = () => {
 
 	useEffect(() => {
 		axios
-			.get("http://localhost:2100/products")
+			.get(
+				"https://devtown-server-lniza185a-mk-saadi.vercel.app/products"
+			)
 			.then((res) => {
 				setItem(res.data);
 			})

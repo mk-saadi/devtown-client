@@ -12,7 +12,9 @@ const AllProducts = () => {
 
 	useEffect(() => {
 		axios
-			.get("http://localhost:2100/products")
+			.get(
+				"https://devtown-server-lniza185a-mk-saadi.vercel.app/products"
+			)
 			.then((res) => {
 				setItem(res.data);
 			})
@@ -90,13 +92,12 @@ const AllProducts = () => {
 			<div className="grid grid-cols-1 overflow-hidden sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 				{filteredItems.map((it) => (
 					<Fade
-						cascade
-						damping={0.8}
+						direction="up"
 						triggerOnce
 						key={it._id}
 					>
 						<div className="relative flex flex-col items-center justify-center p-8 duration-300 border border-gray-900/15 group hover:bg-gray-700/10">
-							<div
+							<Link
 								className="group"
 								to={`/product/${it._id}`}
 							>
@@ -114,7 +115,7 @@ const AllProducts = () => {
 								<p className="mt-1 mb-6 text-lg font-medium text-gray-900">
 									$ {it?.price}
 								</p>
-							</div>
+							</Link>
 							<div className="absolute w-full py-2 font-medium text-center duration-300 bg-white bg-opacity-50 opacity-0 bottom-36 group-hover:opacity-100 ">
 								<Hero it={it} />
 							</div>

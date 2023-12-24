@@ -24,12 +24,10 @@ const Header = () => {
 						to="/"
 						className="-m-1.5 p-1.5"
 					>
-						<span className="sr-only">Your Company</span>
-						<img
-							className="w-auto h-8"
-							src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-							alt=""
-						/>
+						<span className="sr-only">DevTown Shop</span>
+						<h1 className="text-xl font-extrabold text-orange-600/80">
+							DevTown Shop
+						</h1>
 					</Link>
 				</div>
 				<div className="flex lg:hidden">
@@ -82,12 +80,10 @@ const Header = () => {
 							to="/"
 							className="-m-1.5 p-1.5"
 						>
-							<span className="sr-only">Your Company</span>
-							<img
-								className="w-auto h-8"
-								src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-								alt=""
-							/>
+							<span className="sr-only">DevTown Shop</span>
+							<h1 className="text-lg font-extrabold text-orange-600/80">
+								DevTown Shop
+							</h1>
 						</Link>
 						<button
 							type="button"
@@ -113,14 +109,6 @@ const Header = () => {
 										{item.name}
 									</Link>
 								))}
-							</div>
-							<div className="py-6">
-								<a
-									href="#"
-									className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-								>
-									Log in
-								</a>
 							</div>
 						</div>
 					</div>
